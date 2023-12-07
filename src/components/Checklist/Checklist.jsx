@@ -32,24 +32,26 @@ function Checklist() {
     };
 
     return (
-        <div>
-            <h1>Lista de Tarefas</h1>
-            <div>
+        <div id='checklist'>
+            <h1>TaskMaster</h1>
+            <div id='newTask'>
                 <input
                     type="text"
                     value={newTask}
                     onChange={(e) => setNewTask(e.target.value)}
+                    id='inputTask'
+                    placeholder='Digite o nome da tarefa'
                 />
                 <button onClick={addTask}>Adicionar Tarefa</button>
             </div>
-            <ul>
+            <div id='tasks'>
                 {tasks.map((task, index) => (
-                    <li key={index}>
+                    <p key={index} id='task'>
                         {task}
                         <button onClick={() => deleteTask(index)}>Apagar</button>
-                    </li>
+                    </p>
                 ))}
-            </ul>
+            </div>
         </div>
     )
 }
