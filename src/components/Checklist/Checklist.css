@@ -1,0 +1,38 @@
+#checklist {
+    width: 500px;
+}
+
+#inputTask {
+    border: none;
+    border-bottom: #fff solid 1px;
+    background-color: #242424;
+    padding: 10px;
+    outline: none;
+    color: #fff;
+}
+
+#task,
+#newTask {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#task input {
+    margin-right: 20px;
+}
+
+#task a {
+    cursor: pointer;
+}
+
+#newTask {
+    margin: 30px 0;
+}
+
+@media (max-width: 600px) {
+    #checklist {
+        width: 80vw;
+    }
+}

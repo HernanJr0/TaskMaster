@@ -1,6 +1,9 @@
 import Cookies from 'universal-cookie';
 import React, { useState, useEffect } from 'react';
 import { Checkbox } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import './Checklist.css'
+import Add from '@mui/icons-material/Add';
 
 const cookies = new Cookies();
 
@@ -48,7 +51,7 @@ function Checklist() {
                     id='inputTask'
                     placeholder='Digite o nome da tarefa'
                 />
-                <button onClick={addTask}>Adicionar Tarefa</button>
+                <button onClick={addTask}><Add /></button>
             </div>
             <div id='tasks'>
                 {tasks.map((task, index) => (
