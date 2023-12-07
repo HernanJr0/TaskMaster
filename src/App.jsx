@@ -3,7 +3,10 @@ import Checklist from './components/Checklist/Checklist';
 
 function App() {
   return (
-    <Checklist />
+    <div>
+      <h1>TaskMaster</h1>
+      <Checklist />
+    </div>
   );
 }
 

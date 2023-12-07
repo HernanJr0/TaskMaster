@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import React, { useState, useEffect } from 'react';
+import { Checkbox } from '@mui/material';
 
 const cookies = new Cookies();
 
@@ -16,24 +17,29 @@ function Checklist() {
 
     const addTask = () => {
         if (newTask.trim() !== '') {
-            const updatedTasks = [...tasks, newTask];
+            const updatedTasks = [...tasks, { name: newTask, completed: false }];
             setTasks(updatedTasks);
             cookies.set('tasks', updatedTasks, { path: '/' });
             setNewTask('');
         }
     };
 
-    const deleteTask = (index) => {
-        const updatedTasks = tasks.filter((_, i) => i !== index);
-        console.log('Novas tarefas:', updatedTasks);
+    const toggleTask = (index) => {
+        const updatedTasks = tasks.map((task, i) =>
+            i === index ? { ...task, completed: !task.completed } : task
+        );
         setTasks(updatedTasks);
         cookies.set('tasks', updatedTasks, { path: '/' });
-        console.log('Cookies atualizados:', cookies.get('tasks'));
+    };
+
+    const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updatedTasks);
+        cookies.set('tasks', updatedTasks, { path: '/' });
     };
 
     return (
         <div id='checklist'>
-            <h1>TaskMaster</h1>
             <div id='newTask'>
                 <input
                     type="text"
@@ -46,14 +52,21 @@ function Checklist() {
             </div>
             <div id='tasks'>
                 {tasks.map((task, index) => (
-                    <p key={index} id='task'>
-                        {task}
-                        <button onClick={() => deleteTask(index)}>Apagar</button>
-                    </p>
+                    <div id='task' key={index}>
+                        <div id='task'>
+                            <Checkbox
+                                checked={task.completed}
+                                onChange={() => toggleTask(index)}
+                                style={{ color: '#646cff' }}
+                            />
+                            <p>{task.name}</p>
+                        </div>
+                        <a onClick={() => deleteTask(index)}>Apagar</a>
+                    </div>
                 ))}
             </div>
         </div>
     )
 }
 
-export default Checklist
+export default Checklist;
